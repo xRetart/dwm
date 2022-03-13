@@ -32,6 +32,7 @@ static Sp scratchpads[] = {
     { "spfm",        SPAWN_APP("st", "-n", "spfm", "-e", "vifm") },
     { "sptop",       SPAWN_APP("st", "-n", "sptop", "-e", "htop") },
     { "spkeepassxc", SPAWN_APP("keepassxc") },
+	{ "sped",		 SPAWN_APP("st", "-n", "sped", "-e", "nvim") },
 };
 
 // tagging
@@ -46,6 +47,7 @@ static const Rule rules[] = {
     { NULL,    "spfm",        NULL,   SPTAG(1),   1,           -1 },
     { NULL,    "sptop",       NULL,   SPTAG(2),   1,           -1 },
     { NULL,    "spkeepassxc", NULL,   SPTAG(3),   1,           -1 },
+    { NULL,    "sped",        NULL,   SPTAG(4),   1,           -1 },
 };
 
 // layout(s)
@@ -140,6 +142,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_u,                     togglescratch,  { .ui = 1 } },
     { MODKEY|ControlMask,           XK_p,                     togglescratch,  { .ui = 2 } },
     { MODKEY|ControlMask,           XK_x,                     togglescratch,  { .ui = 3 } },
+    { MODKEY|ControlMask,           XK_e,                     togglescratch,  { .ui = 4 } },
 
 	/// session management
     { MODKEY|ControlMask|ShiftMask, XK_q,                     quit,           { 0 } },
