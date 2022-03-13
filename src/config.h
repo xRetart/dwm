@@ -54,7 +54,7 @@ static const Rule rules[] = {
 static const float mfact        = 0.5; // factor of master area size [0.05..0.95]
 static const int nmaster        = 1;    // number of clients in master area
 static const int resizehints    = 0;    // 1 means respect size hints in tiled resizals
-static const int lockfullscreen = 1;    // 1 will force focus on the fullscreen window
+static const int lockfullscreen = 0;    // 1 will force focus on the fullscreen window
 
 static const Layout layouts[] = {
     // <symbol>   <arrange function>
@@ -83,8 +83,8 @@ static Key keys[] = {
     // <modifier>                   <key>                     <function>      <argument>
 	/// navigation
 	//// layout
-    { MODKEY,                       XK_n,                     focusstack,     { .i = +1 } },
-    { MODKEY,                       XK_e,                     focusstack,     { .i = -1 } },
+    { MODKEY,                       XK_n,                     focusstack,       { .i = +1 } },
+    { MODKEY,                       XK_e,                     focusstack,       { .i = -1 } },
 
     TAGKEYS(XK_1, 0)
     TAGKEYS(XK_2, 1)
@@ -97,60 +97,60 @@ static Key keys[] = {
     TAGKEYS(XK_9, 8)
 	
 	//// tags
-    { MODKEY,                       XK_i,                     shiftview,      { .i = -1 } },
-    { MODKEY,                       XK_o,                     shiftview,      { .i = +1 } },
-    { MODKEY,                       XK_Tab,                   view,           { 0 } },
+    { MODKEY,                       XK_i,                     shiftview,        { .i = -1 } },
+    { MODKEY,                       XK_o,                     shiftview,        { .i = +1 } },
+    { MODKEY,                       XK_Tab,                   view,             { 0 } },
 	
 	/// manipulation
 	//// window
-    { MODKEY|ShiftMask,             XK_j,                     movestack,      { .i = +1 } },
-    { MODKEY|ShiftMask,             XK_k,                     movestack,      { .i = -1 } },
-    { MODKEY|ShiftMask,             XK_Return,                zoom,           { 0 } },
-    { MODKEY|ShiftMask,             XK_c,                     killclient,     { 0 } },
-    { MODKEY|ShiftMask,             XK_minus,                 setmfact,       { .f = -0.05 } },
-    { MODKEY|ShiftMask,             XK_equal,                 setmfact,       { .f = +0.05 } },
+    { MODKEY|ShiftMask,             XK_j,                     movestack,        { .i = +1 } },
+    { MODKEY|ShiftMask,             XK_k,                     movestack,        { .i = -1 } },
+    { MODKEY|ShiftMask,             XK_Return,                zoom,             { 0 } },
+    { MODKEY|ShiftMask,             XK_c,                     killclient,       { 0 } },
+    { MODKEY|ShiftMask,             XK_minus,                 setmfact,         { .f = -0.05 } },
+    { MODKEY|ShiftMask,             XK_equal,                 setmfact,         { .f = +0.05 } },
 
 	//// layout
-    { MODKEY|ShiftMask,             XK_equal,                 incnmaster,     { .i = +1 } },
-    { MODKEY|ShiftMask,             XK_minus,                 incnmaster,     { .i = -1 } },
-    { MODKEY|ShiftMask,             XK_t,                     setlayout,      { .v = &layouts[0] } },
-    { MODKEY|ShiftMask,             XK_f,                     setlayout,      { .v = &layouts[1] } },
-    { MODKEY|ShiftMask,             XK_m,                     setlayout,      { .v = &layouts[2] } },
+    { MODKEY|ShiftMask,             XK_equal,                 incnmaster,       { .i = +1 } },
+    { MODKEY|ShiftMask,             XK_minus,                 incnmaster,       { .i = -1 } },
+    { MODKEY|ShiftMask,             XK_t,                     setlayout,        { .v = &layouts[0] } },
+    { MODKEY|ShiftMask,             XK_f,                     setlayout,        { .v = &layouts[1] } },
+    { MODKEY|ShiftMask,             XK_m,                     setlayout,        { .v = &layouts[2] } },
 	
-    { MODKEY|ShiftMask,             XK_space,                 setlayout,      { 0 } },
-    { MODKEY|ShiftMask,             XK_space,                 togglefloating, { 0 } },
-    { MODKEY|ShiftMask,             XK_f,                     togglefullscr,  { 0 } },
-    { MODKEY|ShiftMask,             XK_0,                     view,           { .ui = ~0 } },
+    { MODKEY|ShiftMask,             XK_space,                 setlayout,        { 0 } },
+    { MODKEY|ShiftMask,             XK_space,                 togglefloating,   { 0 } },
+    { MODKEY|ShiftMask,             XK_f,                     togglefullscreen, { 0 } },
+    { MODKEY|ShiftMask,             XK_0,                     view,             { .ui = ~0 } },
 
-    { MODKEY|ShiftMask,             XK_b,                     togglebar,      { 0 } },
+    { MODKEY|ShiftMask,             XK_b,                     togglebar,        { 0 } },
 
 	/// apps
 	//// conventional
-    { MODKEY,                       XK_p,                     spawn,          { .v = dmenucmd } },
-    { MODKEY|ControlMask,           XK_Return,                spawn,          { .v = termcmd } },
-    { MODKEY|ControlMask,           XK_f,                     spawn,          { .v = SPAWN_APP("firefox") } },
-    { MODKEY|ControlMask,           XK_t,                     spawn,          { .v = SPAWN_APP("torbrowser-launcher") } },
-    { MODKEY|ControlMask,           XK_k,                     spawn,          { .v = SPAWN_APP("keepassxc") } },
-    { MODKEY|ControlMask,           XK_s,                     spawn,          { .v = SPAWN_APP("signal") } },
-    { MODKEY|ControlMask,           XK_h,                     spawn,          { .v = SPAWN_TERM_APP("htop") } },
-    { MODKEY|ControlMask,           XK_m,                     spawn,          { .v = SPAWN_TERM_APP("vifm") } },
-    { MODKEY|ControlMask,           XK_a,                     spawn,          { .v = SPAWN_TERM_APP("anitime") } },
-    { MODKEY|ControlMask,           XK_n,                     spawn,          { .v = SPAWN_TERM_APP("nvim") } },
+    { MODKEY,                       XK_p,                     spawn,            { .v = dmenucmd } },
+    { MODKEY|ControlMask,           XK_Return,                spawn,            { .v = termcmd } },
+    { MODKEY|ControlMask,           XK_f,                     spawn,            { .v = SPAWN_APP("firefox") } },
+    { MODKEY|ControlMask,           XK_t,                     spawn,            { .v = SPAWN_APP("torbrowser-launcher") } },
+    { MODKEY|ControlMask,           XK_k,                     spawn,            { .v = SPAWN_APP("keepassxc") } },
+    { MODKEY|ControlMask,           XK_s,                     spawn,            { .v = SPAWN_APP("signal") } },
+    { MODKEY|ControlMask,           XK_h,                     spawn,            { .v = SPAWN_TERM_APP("htop") } },
+    { MODKEY|ControlMask,           XK_m,                     spawn,            { .v = SPAWN_TERM_APP("vifm") } },
+    { MODKEY|ControlMask,           XK_a,                     spawn,            { .v = SPAWN_TERM_APP("anitime") } },
+    { MODKEY|ControlMask,           XK_n,                     spawn,            { .v = SPAWN_TERM_APP("nvim") } },
 
 	//// scratchpads
-    { MODKEY|ControlMask,           XK_y,                     togglescratch,  { .ui = 0 } },
-    { MODKEY|ControlMask,           XK_u,                     togglescratch,  { .ui = 1 } },
-    { MODKEY|ControlMask,           XK_p,                     togglescratch,  { .ui = 2 } },
-    { MODKEY|ControlMask,           XK_x,                     togglescratch,  { .ui = 3 } },
-    { MODKEY|ControlMask,           XK_e,                     togglescratch,  { .ui = 4 } },
+    { MODKEY|ControlMask,           XK_y,                     togglescratch,    { .ui = 0 } },
+    { MODKEY|ControlMask,           XK_u,                     togglescratch,    { .ui = 1 } },
+    { MODKEY|ControlMask,           XK_p,                     togglescratch,    { .ui = 2 } },
+    { MODKEY|ControlMask,           XK_x,                     togglescratch,    { .ui = 3 } },
+    { MODKEY|ControlMask,           XK_e,                     togglescratch,    { .ui = 4 } },
 
 	/// session management
-    { MODKEY|ControlMask|ShiftMask, XK_q,                     quit,           { 0 } },
-    { MODKEY|ControlMask|ShiftMask, XK_s,                     spawn,          { .v = SPAWN_APP("loginctl", "suspend") } },
+    { MODKEY|ControlMask|ShiftMask, XK_q,                     quit,             { 0 } },
+    { MODKEY|ControlMask|ShiftMask, XK_s,                     spawn,            { .v = SPAWN_APP("loginctl", "suspend") } },
 
 	/// non-wm things
-    { 0,                            XF86XK_MonBrightnessDown, spawn,          { .v = SPAWN_APP("xbacklight", "-", "10") } },
-    { 0,                            XF86XK_MonBrightnessUp,   spawn,          { .v = SPAWN_APP("xbacklight", "+", "10") } },
+    { 0,                            XF86XK_MonBrightnessDown, spawn,            { .v = SPAWN_APP("xbacklight", "-", "10") } },
+    { 0,                            XF86XK_MonBrightnessUp,   spawn,            { .v = SPAWN_APP("xbacklight", "+", "10") } },
 };
 
 // button definitions
